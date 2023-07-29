@@ -56,7 +56,7 @@ async function WABot() {
                 text += "\n*--------------------------------------------------*\n";
 
             })
-            text += "🔥  *Go and Fuck the Problems*  🔥"
+            text += "🔥  *All the Best*  🔥"
 
             await sendMessage(process.env.GROUPID, { text: text });
         } catch (err) {
