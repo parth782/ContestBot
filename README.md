@@ -80,8 +80,8 @@ To start pm2 job use command:
    ```
    To stop or kill pm2 job use command:
    ```bash
-  pm2 stop index(stop the job)
-  pm2 kill index(to permanently kill the job)
+  pm2 stop index (stop the job)
+  pm2 kill index (to permanently kill the job)
    ```
    
    To restart pm2 job use command:
