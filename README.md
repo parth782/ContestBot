@@ -97,7 +97,7 @@ To start pm2 job use command:
 
 
 
-Congratulations! Your Contest Bot is now deployed on Microsoft Azure VM and ready to revolutionize the way job seekers find and apply for jobs on WhatsApp!
+Congratulations! Your Contest Bot is now deployed on Microsoft Azure VM and ready to remind you about the upcoming contest on WhatsApp! 🎉🤖
 
 ## Tech Stack 🛠️
 
