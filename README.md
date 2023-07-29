@@ -35,7 +35,7 @@ To deploy Contest Bot on  Microsoft Azure, follow these steps:
 2. **Connect to the Azure VM**: Use SSH to connect to the VM instance using the key pair you created. You can use the following command:
 
    ```bash
-   ssh -i your-key-pair.pem ec2-user@your-azure-machine-ip
+   ssh -i your-key-pair.pem azureuser@your-azure-machine-ip
    ```
 
 3. **Install Node.js**: Install Node.js on the AZURE VM instance by running the following commands:
@@ -46,9 +46,9 @@ To deploy Contest Bot on  Microsoft Azure, follow these steps:
    nvm install node
    ```
 
-4. **Install MongoDB**: Install MongoDB on the EC2 instance by following the MongoDB installation guide. You can choose the appropriate method for your instance's operating system.
+4. **Install MongoDB**: Install MongoDB on the Azure VM instance by following the MongoDB installation guide. You can choose the appropriate method for your instance's operating system.
 
-5. **Clone the Contest Bot Repository**: Clone the RM Bot repository from GitHub onto your Microsoft Azure VM using the following command:
+5. **Clone the Contest Bot Repository**: Clone the Contest Bot repository from GitHub onto your Microsoft Azure VM using the following command:
 
    ```bash
    https://github.com/parth782/ContestBot.git
@@ -61,9 +61,9 @@ To deploy Contest Bot on  Microsoft Azure, follow these steps:
    npm install
    ```
 
-7. **Configure Environment Variables**: Set up the necessary environment variables for the RM Bot. This may include database connection details, API keys, and other configurations. Create a `.env` file in the root directory and specify the required variables.
+7. **Configure Environment Variables**: Set up the necessary environment variables for the Contest Bot. This may include database connection details, API keys, and other configurations. Create a `.env` file in the root directory and specify the required variables.
 
-8. **Start the Bot**: Start the RM Bot application by running the following command:
+8. **Start the Bot**: Start the Contest Bot application by running the following command:
 
    ```bash
    npm start
@@ -106,7 +106,7 @@ Contest Bot is built using the following
  technologies:
 
 - ![Node.js](https://img.icons8.com/color/48/000000/nodejs.png) Node.js: Server-side JavaScript runtime environment.
-- ![MongoDB](https://img.icons8.com/color/48/000000/mongodb.png) MongoDB: NoSQL database for storing job and user data.
+- ![MongoDB](https://img.icons8.com/color/48/000000/mongodb.png) MongoDB: NoSQL database for storing contest data for faster access.
 - ![Azure VM](https://raw.githubusercontent.com/amido/azure-vector-icons/master/renders/virtual-machines.png) Azure VM: Cloud-based virtual machine for hosting the bot.
 
 Feel free to explore and enhance the capabilities of Contest Bot with this powerful tech stack!
