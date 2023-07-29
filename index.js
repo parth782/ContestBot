@@ -63,6 +63,7 @@ async function WABot() {
             console.log(err);
         }
     }
+    //SENDING NOTIFICATIONS AT 7:30AM    
     cron.schedule(" 30 7 * * *", async () => {
         try {
             console.log("job executed at 7:30 AM");
@@ -73,6 +74,8 @@ async function WABot() {
             console.log(err);
         }
     }).start();
+
+    //SENDING NOTIFICATIONS AT 7:30PM
     cron.schedule(" 30 19 * * *", async () => {
         try {
             console.log("job executed at 7:30 PM");
