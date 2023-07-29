@@ -90,7 +90,7 @@ To start pm2 job use command:
    ```
   To check pm2 status or log use command:
    ```bash
-  pm2 status ( for status)
+  pm2 status (for status)
   pm2 log (for logs)
    ```
    
