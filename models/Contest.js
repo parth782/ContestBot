@@ -14,6 +14,7 @@ const ContestSchema=new Schema({
         type:Date,
         required:true
     },
+    
     link:{
         type:String,
         required:true

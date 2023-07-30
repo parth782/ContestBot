@@ -47,7 +47,7 @@ async function WABot() {
     async function run() {
         try {
             let text = "*-------🚀 Upcoming Contests List 🔮------*";
-            const contests = await Contest.find({ start_time: { $gte: new Date().toLocaleString("en-US", { timeZone: 'Asia/Kolkata' }), $lte: new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' }) } }).sort({ start_time: 1 });
+            const contests = await Contest.find({ start_time: { $gte: new Date(), $lte: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}}).sort({ start_time: 1 });
             contests.forEach(async function (item, index) {
                 let startTime = new Date(item.start_time).toLocaleString("en-GB", { timeZone: 'Asia/Kolkata' });
 
@@ -121,10 +121,10 @@ async function WABot() {
 
 }
 
-const saveContest = cron.schedule("0 0 * * *", async () => {
+const saveContest = cron.schedule(" 15 14 * * *", async () => {
     try {
         console.log("job executed");
-        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&format_time=true&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&order_by=start&limit=150`);
+        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&order_by=start&limit=150`);
 
         const contests = response.data.objects;
         contests.forEach(async function (item, index) {
@@ -136,8 +136,8 @@ const saveContest = cron.schedule("0 0 * * *", async () => {
 
             const contest = new Contest({
                 name: item.event,
-                start_time: new Date(item.start).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' }),
-                end_time: new Date(item.end).toLocaleString("en-US", { timeZone: 'Asia/Kolkata' }),
+                start_time: contest.start,
+                end_time: contest.end,
                 link: item.href,
                 source: item.resource,
                 id: item.id
@@ -146,7 +146,7 @@ const saveContest = cron.schedule("0 0 * * *", async () => {
 
         })
 
-        res.status(200).json({ status: "success", data: contests });
+        console.log("job executed successfully");
         return;
     } catch (err) {
         console.log(err);
@@ -154,7 +154,7 @@ const saveContest = cron.schedule("0 0 * * *", async () => {
     }
 })
 
-WABot();
+//WABot();
 saveContest.start();
 
 
