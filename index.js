@@ -154,7 +154,7 @@ const saveContest = cron.schedule(" 15 14 * * *", async () => {
     }
 })
 
-//WABot();
+WABot();
 saveContest.start();
 
 
