@@ -15,17 +15,17 @@ const getMessage = (key) => {
     const { id } = key;
     if (store[id]) return store[id].message;
 };
-const getText = (message) => {
-    try {
-        return (
-            message.conversation ||
-            message.extendedTextMessage.text ||
-            message.imageMessage.caption
-        );
-    } catch {
-        return "";
-    }
-};
+// const getText = (message) => {
+//     try {
+//         return (
+//             message.conversation ||
+//             message.extendedTextMessage.text ||
+//             message.imageMessage.caption
+//         );
+//     } catch {
+//         return "";
+//     }
+// };
 
 
 async function WABot() {
@@ -104,15 +104,15 @@ async function WABot() {
         if (events["creds.update"]) {
             await saveCreds();
         }
-        if (events["messages.upsert"]) {
-            const { messages } = events["messages.upsert"];
-            messages.forEach((msg) => {
-                // processing
-                if (getText(msg.message).startsWith("@hi")) {
-                    console.log(msg.key.remoteJid);
-                }
-            });
-        }
+        // if (events["messages.upsert"]) {
+        //     const { messages } = events["messages.upsert"];
+        //     messages.forEach((msg) => {
+        //         // processing
+        //         if (getText(msg.message).startsWith("@hi")) {
+        //             console.log(msg.key.remoteJid);
+        //         }
+        //     });
+        // }
     });
 
 
@@ -121,7 +121,7 @@ async function WABot() {
 
 }
 
-const saveContest = cron.schedule(" 15 14 * * *", async () => {
+const saveContest = cron.schedule(" 0 0 * * *", async () => {
     try {
         console.log("job executed");
         const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&order_by=start&limit=150`);
@@ -136,8 +136,8 @@ const saveContest = cron.schedule(" 15 14 * * *", async () => {
 
             const contest = new Contest({
                 name: item.event,
-                start_time: contest.start,
-                end_time: contest.end,
+                start_time: new Date(item.start+"Z").toISOString(),
+                end_time: new Date(item.end+"Z").toISOString(),
                 link: item.href,
                 source: item.resource,
                 id: item.id

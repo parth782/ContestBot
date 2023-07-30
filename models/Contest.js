@@ -7,14 +7,13 @@ const ContestSchema=new Schema({
         required:true
     },
     start_time:{
-        type:Date,
-        required:true
+       type:Date,
+       required:true
     },
     end_time:{
         type:Date,
         required:true
     },
-    
     link:{
         type:String,
         required:true
