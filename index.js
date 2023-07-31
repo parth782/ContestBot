@@ -57,8 +57,10 @@ async function WABot() {
 
             })
             text += "🔥  *All the Best*  🔥"
+            if(contests.length()!==0){
 
             await sendMessage(process.env.GROUPID, { text: text });
+            }
         } catch (err) {
             console.log(err);
         }
