@@ -46,8 +46,10 @@ async function WABot() {
     };
     async function run() {
         try {
-            let text = "*-------🚀 Upcoming Contests List 🔮------*";
+            
             const contests = await Contest.find({ start_time: { $gte: new Date(), $lte: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}}).sort({ start_time: 1 });
+
+            let text = "*-------🚀 Upcoming Contests List 🔮------*";
             contests.forEach(async function (item, index) {
                 let startTime = new Date(item.start_time).toLocaleString("en-GB", { timeZone: 'Asia/Kolkata' });
 
@@ -57,7 +59,7 @@ async function WABot() {
 
             })
             text += "🔥  *All the Best*  🔥"
-            if(contests.length()!==0){
+            if(contests.length!==0){
 
             await sendMessage(process.env.GROUPID, { text: text });
             }
