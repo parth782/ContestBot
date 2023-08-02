@@ -46,8 +46,8 @@ async function WABot() {
     };
     async function run() {
         try {
-            
-            const contests = await Contest.find({ start_time: { $gte: new Date(), $lte: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}}).sort({ start_time: 1 });
+
+            const contests = await Contest.find({ start_time: { $gte: new Date(), $lte: new Date(new Date().getTime() + 24 * 60 * 60 * 1000) } }).sort({ start_time: 1 });
 
             let text = "*-------🚀 Upcoming Contests List 🔮------*";
             contests.forEach(async function (item, index) {
@@ -59,9 +59,9 @@ async function WABot() {
 
             })
             text += "🔥  *All the Best*  🔥"
-            if(contests.length!==0){
+            if (contests.length !== 0) {
 
-            await sendMessage(process.env.GROUPID, { text: text });
+                await sendMessage(process.env.GROUPID, { text: text });
             }
         } catch (err) {
             console.log(err);
@@ -128,7 +128,7 @@ async function WABot() {
 const saveContest = cron.schedule(" 0 0 * * *", async () => {
     try {
         console.log("job executed");
-        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&order_by=start&limit=150`);
+        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&start_time__during=259200&order_by=start&limit=150`);
 
         const contests = response.data.objects;
         contests.forEach(async function (item, index) {
@@ -137,16 +137,18 @@ const saveContest = cron.schedule(" 0 0 * * *", async () => {
             if (record) {
                 return;
             }
-
-            const contest = new Contest({
-                name: item.event,
-                start_time: new Date(item.start+"Z").toISOString(),
-                end_time: new Date(item.end+"Z").toISOString(),
-                link: item.href,
-                source: item.resource,
-                id: item.id
-            })
-            await contest.save();
+            else {
+                //console.log(item.id);
+                const contest = new Contest({
+                    name: item.event,
+                    start_time: new Date(item.start + "Z").toISOString(),
+                    end_time: new Date(item.end + "Z").toISOString(),
+                    link: item.href,
+                    source: item.resource,
+                    id: item.id
+                })
+                await contest.save();
+            }
 
         })
 
@@ -160,6 +162,7 @@ const saveContest = cron.schedule(" 0 0 * * *", async () => {
 
 WABot();
 saveContest.start();
+//console.log(new Date());
 
 
 
