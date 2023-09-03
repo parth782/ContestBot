@@ -128,7 +128,7 @@ async function WABot() {
 const saveContest = cron.schedule(" 30 0 * * *", async () => {
     try {
         console.log("job executed");
-        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com&start__gt=${new Date().toISOString()}&start_time__during=345600&order_by=start&limit=150`);
+        const response = await axios.get(`https://clist.by:443/api/v3/contest/?username=${process.env.API_USERNAME}&api_key=${process.env.API_KEY}&total_count=true&upcoming=true&resource=leetcode.com%2Ccodingninjas.com%2Fcodestudio%2Cgeeksforgeeks.org%2Chackerearth.com%2Ccodeforces.com%2Cmy.newtonschool.co%2Ccodechef.com%2Catcoder.jp&start__gt=${new Date().toISOString()}&start_time__during=345600&order_by=start&limit=150`);
 
         const contests = response.data.objects;
         contests.forEach(async function (item, index) {
