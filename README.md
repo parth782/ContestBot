@@ -8,7 +8,7 @@ Welcome to the Contest Bot - will remind you about all upcoming contests happeni
 
 ## Screenshots
 
-|      **New Job Notification**           |
+|      **New Contest Notification**           |
 |------------------------------------- |
 | ![ContestBot Message](./screenshots/bot.jpg) |
 
